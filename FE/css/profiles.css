@@ -1,0 +1,83 @@
+:root {
+  color-scheme: light;
+  font-family: Arial, sans-serif;
+  color: #1f2937;
+  background: #f3f6fa;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; }
+.profiles-svg-defs { position:absolute; width:0; height:0; overflow:hidden; }
+.profiles-page { position:relative; isolation:isolate; overflow-x:hidden; }
+.profiles-page::before {
+  position:fixed;
+  z-index:0;
+  top:50%;
+  left:50%;
+  width:min(46vw,480px);
+  aspect-ratio:667 / 512;
+  content:"";
+  background:url("../images/anviet-logo-512h.png") center / 100% 100% no-repeat;
+  opacity:.1;
+  filter:url("#profiles-logo-cloth-wave");
+  transform-origin:left center;
+  animation:profiles-logo-wave 5s ease-in-out infinite;
+  pointer-events:none;
+}
+.profiles-page > .topbar,
+.profiles-page > .container { position:relative; z-index:1; }
+@keyframes profiles-logo-wave {
+  0%,100% { transform:translate(-50%,-50%) perspective(1200px) rotateY(-4deg) skewY(-.3deg) scaleX(.99); }
+  25% { transform:translate(-50%,-50%) perspective(1200px) rotateY(-1deg) skewY(.15deg) scaleX(1.005); }
+  50% { transform:translate(-50%,-50%) perspective(1200px) rotateY(4deg) skewY(.3deg) scaleX(.99); }
+  75% { transform:translate(-50%,-50%) perspective(1200px) rotateY(1deg) skewY(-.15deg) scaleX(1.005); }
+}
+@media(prefers-reduced-motion:reduce) {
+  .profiles-page::before { animation:none; filter:none; transform:translate(-50%,-50%); }
+}
+.topbar { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:16px 5vw; background:#fff; box-shadow:0 1px 5px #00000012; }
+.topbar-title { display:flex; align-items:center; gap:16px; min-width:0; }
+.topbar-title h1 { margin:0; font-size:20px; overflow-wrap:anywhere; }
+.container { width:min(1440px,94vw); margin:32px auto; }
+.page-heading { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:24px; }
+.page-heading h2 { margin:0 0 8px; }
+.page-heading p { margin:0; color:#64748b; }
+.search-label { display:block; margin-bottom:8px; font-weight:600; }
+input[type="search"] { width:100%; min-width:0; border:1px solid #cbd5e1; border-radius:7px; padding:12px; font:inherit; }
+.list-actions { display:flex; align-items:center; gap:12px; margin:18px 0 10px; }
+#selectedCount { margin-left:auto; color:#64748b; }
+.btn { border:0; border-radius:7px; padding:10px 14px; cursor:pointer; font-weight:600; text-decoration:none; display:inline-block; white-space:nowrap; }
+.btn:disabled { opacity:.6; cursor:wait; }
+.btn-primary { background:#0877c9; color:#fff; }
+.btn-secondary { background:#e2e8f0; color:#1f2937; }
+.btn-danger { background:#fee2e2; color:#991b1b; }
+#statusLine { min-height:1.25em; color:#334155; }
+#statusLine.error { color:#b91c1c; }
+.table-wrap { width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; background:#fff; border:1px solid #e2e8f0; border-radius:10px; }
+table { width:100%; border-collapse:collapse; min-width:880px; }
+th,td { padding:11px 12px; border-bottom:1px solid #e2e8f0; text-align:left; vertical-align:middle; }
+th { background:#f8fafc; font-weight:700; }
+tbody tr:last-child td { border-bottom:0; }
+.check-column { width:40px; }
+.profile-thumb { display:block; width:44px; height:44px; border-radius:50%; object-fit:cover; background:#e2e8f0; }
+.profile-thumb-empty { display:grid; place-items:center; color:#64748b; }
+.row-actions { display:flex; gap:8px; }
+.row-actions .btn { padding:7px 10px; }
+.empty-state { padding:32px 16px; margin-top:16px; text-align:center; color:#64748b; background:#fff; border-radius:10px; }
+@media(max-width:650px) {
+  .topbar,.topbar-title,.page-heading { align-items:stretch; flex-direction:column; }
+  .topbar { padding:14px 4vw; }
+  .container { width:92vw; margin:22px auto; }
+  .page-heading { gap:12px; margin-bottom:18px; }
+  .list-actions { align-items:stretch; flex-wrap:wrap; gap:8px; }
+  .list-actions .btn { flex:1 1 calc(50% - 8px); text-align:center; }
+  #selectedCount { width:100%; margin-left:0; }
+  .topbar > .btn { align-self:flex-start; }
+  input[type="search"] { min-height:44px; font-size:16px; }
+  .empty-state { padding:24px 14px; }
+}
+@media(max-width:380px) {
+  .list-actions .btn { flex-basis:100%; }
+  .topbar-title { gap:10px; }
+  .topbar-title h1 { font-size:18px; }
+}

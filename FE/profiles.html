@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hồ sơ nhân sự</title>
+    <link rel="stylesheet" href="css/profiles.css?v=20261021-responsive" />
+    <script src="config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
+  </head>
+  <body class="profiles-page">
+    <svg class="profiles-svg-defs" aria-hidden="true" focusable="false">
+      <filter
+        id="profiles-logo-cloth-wave"
+        x="-15%"
+        y="-15%"
+        width="130%"
+        height="130%"
+        color-interpolation-filters="sRGB"
+      >
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.004 0.035"
+          numOctaves="1"
+          seed="3"
+          result="wind"
+        >
+          <animate
+            attributeName="baseFrequency"
+            dur="5s"
+            values="0.004 0.035;0.006 0.045;0.004 0.035"
+            repeatCount="indefinite"
+          />
+        </feTurbulence>
+        <feOffset in="wind" dx="-120" dy="0" result="movingWind">
+          <animate
+            attributeName="dx"
+            from="-120"
+            to="360"
+            dur="5s"
+            repeatCount="indefinite"
+          />
+        </feOffset>
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="movingWind"
+          scale="24"
+          xChannelSelector="R"
+          yChannelSelector="G"
+        />
+      </filter>
+    </svg>
+    <header class="topbar">
+      <div class="topbar-title">
+        <a class="btn btn-secondary" href="./folders.html">← Thư mục</a>
+        <h1 id="folderTitle">Đang tải thư mục...</h1>
+      </div>
+      <button id="logoutButton" class="btn btn-secondary" type="button">Đăng xuất</button>
+    </header>
+    <main class="container">
+      <section class="page-heading">
+        <div>
+          <h2>Danh sách hồ sơ nhân sự</h2>
+          <p id="profileCount">0/50 hồ sơ</p>
+        </div>
+        <a id="scanCreateBtn" class="btn btn-primary" href="#">Quét/Tạo hồ sơ mới</a>
+      </section>
+      <label class="search-label" for="profileSearch">Tìm kiếm nhân sự</label>
+      <input id="profileSearch" type="search" placeholder="Tìm theo họ tên, CCCD, SĐT, loại thợ hoặc nhà thầu..." autocomplete="off" />
+      <div class="list-actions">
+        <button id="selectAllBtn" class="btn btn-secondary" type="button">Chọn tất cả</button>
+        <button id="deleteSelectedBtn" class="btn btn-danger" type="button" disabled>Xóa đã chọn</button>
+        <button id="exportProfilesBtn" class="btn btn-secondary" type="button">Xuất file Excel</button>
+        <span id="selectedCount" role="status">0 hồ sơ được chọn</span>
+      </div>
+      <p id="statusLine" role="status"></p>
+      <div id="emptyState" class="empty-state" hidden>Chưa có hồ sơ trong thư mục này.</div>
+      <div class="table-wrap">
+        <table id="profileTable">
+          <thead>
+            <tr>
+              <th scope="col" class="check-column" aria-label="Chọn"></th>
+              <th scope="col">STT</th>
+              <th scope="col">Ảnh</th>
+              <th scope="col">Họ và tên</th>
+              <th scope="col">CCCD</th>
+              <th scope="col">SĐT</th>
+              <th scope="col">Loại thợ</th>
+              <th scope="col">Nhà thầu</th>
+              <th scope="col">Thao tác</th>
+            </tr>
+          </thead>
+          <tbody id="profileTableBody"></tbody>
+        </table>
+      </div>
+    </main>
+    <script type="module" src="js/profiles.js?v=20261021-export-centered-cells"></script>
+  </body>
+</html>

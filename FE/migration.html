@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nhập dữ liệu browser</title>
+    <link rel="stylesheet" href="css/folder.css?v=20261021-responsive" />
+    <script src="config.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Nhập dữ liệu cũ</h1>
+      <a class="btn btn-secondary" href="./folders.html">Quay lại thư mục</a>
+    </header>
+    <main class="container login-card">
+      <p>
+        Chọn tệp JSON đã xuất. Hãy xem trước và đối chiếu trước khi nhập. Tệp
+        trên 25 MB nên được chia nhỏ trước khi thử.
+      </p>
+      <input id="backupFile" type="file" accept="application/json,.json" />
+      <div class="top-actions">
+        <button id="previewButton" class="btn btn-secondary" type="button">
+          Xem trước
+        </button>
+        <button
+          id="importButton"
+          class="btn btn-primary"
+          type="button"
+          disabled
+        >
+          Nhập dữ liệu
+        </button>
+      </div>
+      <div id="previewResult" role="status"></div>
+      <p id="migrationError" class="error" role="alert"></p>
+    </main>
+    <script type="module" src="js/migration.js"></script>
+  </body>
+</html>

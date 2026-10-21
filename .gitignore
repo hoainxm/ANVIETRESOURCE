@@ -1,0 +1,29 @@
+# Python virtual environments
+BE/venv/
+BE/.venv/
+venv/
+.venv/
+
+# Python cache
+**/__pycache__/
+*.py[cod]
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+BE/.env
+
+# Local databases and uploaded files
+BE/instance/
+BE/tmp_uploads/
+*.db
+*.sqlite
+*.sqlite3
+*.log
+
+# Node.js dependencies
+node_modules/
+
+# Incomplete model downloads
+*.part

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#eef2ff" />
+    <title>Đăng nhập — Quản lý hồ sơ nhân sự</title>
+    <link rel="stylesheet" href="css/folder.css?v=20261021-responsive" />
+    <script src="config.js"></script>
+  </head>
+  <body class="login-body">
+    <main class="login-container login-page">
+      <section class="login-card" aria-label="Đăng nhập quản lý hồ sơ">
+        <div class="login-form-panel">
+          <img
+            class="login-brand"
+            src="images/anviet-logo-512h.png"
+            alt="An Việt Resource"
+            draggable="false"
+          />
+
+          <div class="login-heading">
+            <!-- <span class="login-eyebrow">AN VIỆT RESOURCE</span> -->
+            <h1>Đăng nhập</h1>
+            <p>Đăng nhập để tiếp tục quản lý hồ sơ nhân sự.</p>
+          </div>
+
+          <form id="loginForm" class="login-form">
+            <div class="login-field">
+              <label for="email">Email hoặc tên đăng nhập</label>
+              <input
+                id="email"
+                type="text"
+                placeholder="Nhập email hoặc tên đăng nhập"
+                autocomplete="username"
+                required
+              />
+            </div>
+            <div class="login-field">
+              <label for="password">Mật khẩu</label>
+              <input
+                id="password"
+                type="password"
+                placeholder="Nhập mật khẩu"
+                autocomplete="current-password"
+                required
+              />
+            </div>
+            <p
+              id="loginError"
+              class="error"
+              role="alert"
+              aria-live="polite"
+            ></p>
+            <button
+              id="loginButton"
+              class="btn btn-primary login-submit"
+              type="submit"
+            >
+              Đăng nhập
+            </button>
+          </form>
+
+          <p class="login-security">
+            <span aria-hidden="true">●</span>
+            Thông tin hồ sơ được quản lý an toàn
+          </p>
+        </div>
+
+        <aside class="login-showcase" aria-label="Giới thiệu hệ thống">
+          <img
+            class="login-showcase-logo"
+            src="images/anviet-logo-512h.png"
+            alt=""
+            aria-hidden="true"
+            draggable="false"
+          />
+          <div class="login-art" aria-hidden="true">
+            <div class="art-orbit art-orbit-one"></div>
+            <div class="art-orbit art-orbit-two"></div>
+            <div class="art-dots"></div>
+
+            <div class="art-profile-list">
+              <div class="art-list-row">
+                <span class="art-avatar"></span>
+                <span class="art-line"></span>
+              </div>
+              <div class="art-list-row">
+                <span class="art-avatar"></span>
+                <span class="art-line art-line-short"></span>
+              </div>
+              <div class="art-list-row art-list-row-active">
+                <span class="art-avatar"></span>
+                <span class="art-line"></span>
+              </div>
+            </div>
+
+            <div class="art-main-card">
+              <div class="art-card-heading">
+                <span class="art-user-icon">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="8" r="3.5" />
+                    <path d="M5.5 20c.4-3.5 2.7-5.5 6.5-5.5s6.1 2 6.5 5.5" />
+                  </svg>
+                </span>
+                <span>
+                  <strong>Hồ sơ nhân sự</strong>
+                  <small>Quản lý tập trung</small>
+                </span>
+              </div>
+              <div class="art-stat">
+                <strong>Hồ sơ</strong>
+                <span>Được cập nhật an toàn</span>
+              </div>
+              <div class="art-chart">
+                <div class="art-chart-labels">
+                  <span>Thông tin</span>
+                  <span>Giấy tờ</span>
+                  <span>Nhân sự</span>
+                </div>
+                <svg viewBox="0 0 260 92" preserveAspectRatio="none">
+                  <path
+                    class="art-chart-fill"
+                    d="M0 75 C25 67 30 38 58 48 S93 72 118 52 S151 26 178 42 S223 56 260 14 V92 H0Z"
+                  />
+                  <path
+                    class="art-chart-line"
+                    d="M0 75 C25 67 30 38 58 48 S93 72 118 52 S151 26 178 42 S223 56 260 14"
+                  />
+                  <circle cx="178" cy="42" r="4" />
+                  <circle cx="260" cy="14" r="4" />
+                </svg>
+              </div>
+              <div class="art-card-footer">
+                <span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="art-checkmark">✓</div>
+          </div>
+
+          <div class="login-showcase-copy">
+            <h2>Quản lý hồ sơ<br />gọn gàng, hiệu quả</h2>
+            <p>Lưu trữ và tra cứu thông tin nhân sự trong một nơi.</p>
+            <div class="showcase-indicators" aria-hidden="true">
+              <!-- <span class="is-active"></span><span></span><span></span> -->
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+    <!-- <script>
+      window.APP_CONFIG = {
+        apiBase: "http://192.168.1.103:8000",
+      };
+    </script> -->
+    <script type="module" src="js/login.js?v=20261021-default-folders"></script>
+  </body>
+</html>

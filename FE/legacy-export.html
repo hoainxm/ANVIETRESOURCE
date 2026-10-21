@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sao lưu dữ liệu cũ</title>
+    <link rel="stylesheet" href="css/folder.css?v=20261021-responsive" />
+    <script src="config.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Sao lưu dữ liệu browser</h1>
+      <a class="btn btn-secondary" href="./folders.html">Quay lại thư mục</a>
+    </header>
+    <main class="container login-card">
+      <p>Tệp sao lưu có thể chứa dữ liệu cá nhân. Hãy lưu ở nơi riêng tư.</p>
+      <button id="exportButton" class="btn btn-primary" type="button">Tạo tệp sao lưu</button>
+      <p id="exportStatus" role="status"></p>
+    </main>
+    <script type="module" src="js/legacyExport.js"></script>
+  </body>
+</html>

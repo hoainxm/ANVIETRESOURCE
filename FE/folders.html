@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý thư mục hồ sơ</title>
+    <link rel="stylesheet" href="css/folder.css?v=20261021-responsive" />
+    <script src="config.js"></script>
+  </head>
+  <body class="folders-page">
+    <svg class="folders-svg-defs" aria-hidden="true" focusable="false">
+      <filter
+        id="folders-logo-cloth-wave"
+        x="-15%"
+        y="-15%"
+        width="130%"
+        height="130%"
+        color-interpolation-filters="sRGB"
+      >
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.004 0.035"
+          numOctaves="1"
+          seed="3"
+          result="wind"
+        >
+          <animate
+            attributeName="baseFrequency"
+            dur="5s"
+            values="0.004 0.035;0.006 0.045;0.004 0.035"
+            repeatCount="indefinite"
+          />
+        </feTurbulence>
+        <feOffset in="wind" dx="-120" dy="0" result="movingWind">
+          <animate
+            attributeName="dx"
+            from="-120"
+            to="360"
+            dur="5s"
+            repeatCount="indefinite"
+          />
+        </feOffset>
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="movingWind"
+          scale="24"
+          xChannelSelector="R"
+          yChannelSelector="G"
+        />
+      </filter>
+    </svg>
+    <header class="topbar">
+      <h1>Quản lý hồ sơ nhân sự</h1>
+      <div class="top-actions">
+        <a id="migrationLink" href="./legacy-export.html">Sao lưu dữ liệu cũ</a>
+        <button id="logoutButton" class="btn btn-secondary" type="button">
+          Đăng xuất
+        </button>
+      </div>
+    </header>
+    <main class="container">
+      <div class="page-heading">
+        <div>
+          <h2>Thư mục hồ sơ</h2>
+          <p id="folderCount">0/100 thư mục</p>
+        </div>
+        <div class="page-actions">
+          <button id="btnNewFolder" class="btn btn-primary" type="button">
+            Tạo thư mục mới
+          </button>
+        </div>
+      </div>
+      <label class="search-label" for="folderSearch">Tìm kiếm thư mục</label>
+      <input
+        id="folderSearch"
+        type="search"
+        placeholder="Nhập tên thư mục..."
+        autocomplete="off"
+      />
+      <p id="statusLine" role="status"></p>
+      <div id="folderList" class="folder-grid">Đang tải thư mục...</div>
+    </main>
+    <dialog id="folderDialog">
+      <form method="dialog" class="dialog-form">
+        <h2>Tạo thư mục mới</h2>
+        <label for="folderName">Tên thư mục</label>
+        <input id="folderName" maxlength="100" required />
+        <p id="folderError" class="error" role="alert"></p>
+        <div class="dialog-actions">
+          <button id="cancelFolder" class="btn btn-secondary" type="button">
+            Hủy
+          </button>
+          <button id="saveFolder" class="btn btn-primary" type="submit">
+            Tạo
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <dialog
+      id="deleteFolderDialog"
+      aria-labelledby="deleteFolderTitle"
+      aria-describedby="deleteFolderMessage"
+    >
+      <form method="dialog" class="dialog-form">
+        <h2 id="deleteFolderTitle">Xác nhận xóa thư mục</h2>
+        <p id="deleteFolderMessage" class="dialog-description"></p>
+        <div class="dialog-actions">
+          <button class="btn btn-secondary" value="cancel">Hủy</button>
+          <button class="btn btn-danger" value="confirm">Xóa thư mục</button>
+        </div>
+      </form>
+    </dialog>
+    <script type="module" src="js/folders.js?v=20261021-folder-delete-dialog"></script>
+  </body>
+</html>
