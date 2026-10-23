@@ -3,18 +3,18 @@
 Flask serves both the frontend and API in local development. The shared
 database defaults to SQLite at `BE/instance/hr_profiles.sqlite3`; production
 can use PostgreSQL. CCCD OCR uses the configured OpenAI vision API; portrait
-processing remains local.
+processing uses YOLO and OpenCV in the backend.
 
 ## Local setup
 
 From PowerShell:
 
 ```powershell
-cd D:\cmnd\BE
+cd D:\ANVIETRESOURCE\BE
 py -3.11 -m venv venv
 .\venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-Copy-Item .env.example .env
+if (!(Test-Path .env)) { Copy-Item .env.example .env }
 ```
 
 Keep the existing `.env`; do not overwrite it with the example. Configure a
@@ -149,6 +149,56 @@ API on the same site (for example, `app.example.com` and `api.example.com`) for
 secure cookie authentication. Keep secrets and database credentials out of
 frontend files. Review OpenAI's data processing and retention terms before
 sending real identity documents.
+
+## Deploying the full application to Render
+
+The repository-root `render.yaml` defines a paid Render Web Service with
+2 GB RAM and a PostgreSQL database with 1 GB RAM and 5 GB initial storage, in
+the Singapore region. The service runs from the
+repository root so Flask can serve both `BE/` and `FE/`; it does not package
+the backend as a serverless function. The configured web plan has 2 GB RAM
+for the image-processing dependencies and YOLO. Confirm current plan pricing
+and resource limits in Render before applying the Blueprint. Increase the web
+plan if Render logs show out-of-memory errors during startup or image
+processing.
+
+Before deploying:
+
+1. Review the files to be pushed and push the intended changes to the `main`
+   branch of `phuongleevt03/ANVIETRESOURCE`. Do not commit `.env`, API keys,
+   database URLs, local databases, or real identity data.
+2. Open Render Dashboard and choose **New > Blueprint**. Connect
+   `phuongleevt03/ANVIETRESOURCE`, select `main`, and review the paid resources
+   and costs shown by Render before applying the Blueprint.
+3. Keep the web service name `anvietresource` so its HTTPS origin matches
+   `ALLOWED_ORIGINS` in `render.yaml`. If that name is unavailable or changed,
+   update `ALLOWED_ORIGINS` in the Render service environment to the exact
+   HTTPS URL Render assigns; do not add a trailing slash.
+4. Enter `OPENAI_API_KEY` in Render when prompted or in the service's
+   **Environment** page. The key is intentionally not stored in this file.
+   Render generates `SECRET_KEY`; the Blueprint connects the service to its
+   PostgreSQL database and runs `flask --app app db upgrade` before starting
+   Gunicorn.
+
+After the first successful deploy, open the web service's Shell and create the
+first administrator:
+
+```bash
+cd BE
+flask --app app create-user
+```
+
+Use the interactive prompt to create an admin password of at least 12
+characters. Open the Render service URL, verify `/api/health`, then test login,
+record creation, OCR, QR/MRZ verification, and portrait cropping with
+non-sensitive test data. Review Render logs and metrics for build, startup, or
+memory errors.
+
+Render PostgreSQL is separate from the local SQLite database. Existing local
+records are not copied automatically. Keep local `BE/.env` and local SQLite
+configuration separate from Render environment variables; local development
+continues to use the setup described above. Verify Render's current storage,
+backup, retention, and pricing terms before using real identity data.
 
 ## Tests
 
